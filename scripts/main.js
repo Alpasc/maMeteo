@@ -1,3 +1,7 @@
+import tabJoursEnOrdre from './Utilitaire/gestionTemps.js';
+
+// console.log('DEPUIS MAIN JS ' + tabJoursEnOrdre);
+
 const CLEFAPI = '9538bdeb0237d0fac380697b08039cc4';
 let resultatAPI;
 
@@ -6,6 +10,9 @@ const temperature = document.querySelector('.temperature');
 const localisation = document.querySelector('.localisation');
 const heure = document.querySelectorAll('.heure-nom-prevision');
 const tempPourH = document.querySelectorAll('.heure-prevision-valeur');
+const joursDiv = document.querySelectorAll('.jour-prevision-nom');
+const tempsJourDiv = document.querySelectorAll('.jour-prevision-temp');
+const imgIcon = document.querySelectorAll('.logo-meteo');
 
 if(navigator.geolocation) {
   navigator.geolocation.getCurrentPosition(position => {
@@ -26,7 +33,7 @@ function AppelAPI(long, lat) {
     return reponse.json();
   })
   .then((data) => {
-    console.log(data);
+    // console.log(data);
 
     resultatAPI = data;
 
@@ -48,12 +55,30 @@ function AppelAPI(long, lat) {
       } else {
         heure[i].innerText = `${heureIncr}h`;
       }
-      
+
     }
 
     //temperature par tranche de 3 heures
     for(let j = 0; j < tempPourH.length; j++) {
       tempPourH[j].innerText = `${Math.trunc(resultatAPI.hourly[j * 3 + 3].temp)}º`
     }
+
+    //afficher les jours sur la derniere ligne 
+    for(let k = 0; k < tabJoursEnOrdre.length; k++) {
+      joursDiv[k].innerText = tabJoursEnOrdre[k];
+    }
+
+    //afficher la temperature de chaque jour
+    for(let m = 0; m < 7; m++) {
+      tempsJourDiv[m].innerText = `${Math.trunc(resultatAPI.daily[m + 1].temp.day)}º`
+    }
+
+    //icone dynamique
+    if(heuresActuelle >= 6 && heuresActuelle <= 21) {
+      imgIcon.src = `ressources/jour/${resultatAPI.current.weather[0].icon}.svg`
+    } else {
+      imgIcon.src = `ressources/nuit/${resultatAPI.current.weather[0].icon}.svg`
+    }
+
   })
 }
