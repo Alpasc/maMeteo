@@ -13,7 +13,8 @@ const tempPourH = document.querySelectorAll('.heure-prevision-valeur');
 const joursDiv = document.querySelectorAll('.jour-prevision-nom');
 const tempsJourDiv = document.querySelectorAll('.jour-prevision-temp');
 const imgIcone = document.querySelector('.logo-meteo');
-const chargementContainer = document.querySelector('.overlay-icone-chargement'); 
+// const chargementContainer = document.querySelector('.overlay-icone-chargement');
+const dateJour = document.querySelector('.date'); 
 
 
 if(navigator.geolocation) {
@@ -28,6 +29,20 @@ if(navigator.geolocation) {
   })
 }
 
+let date = new Date();
+let dateLocale = date.toLocaleString('fr-FR', {
+  weekday: 'short',
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric'
+})
+dateLocale = dateLocale.charAt(0).toUpperCase() + dateLocale.slice(1,6) + ' ' + dateLocale.charAt(7).toUpperCase() + dateLocale.slice(8,17);
+dateJour.innerText = dateLocale;
+console.log(dateLocale);
+
+// dateJour.innerText = `${dateJour.getDate() + dateJour.getMonth() + dateJour.getFullYear()}`
+
+
 function AppelAPI(long, lat) {
   // console.log(long, lat);
 
@@ -36,7 +51,7 @@ function AppelAPI(long, lat) {
     return reponse.json();
   })
   .then((data) => {
-    console.log(data);
+    // console.log(data);
 
     resultatsAPI = data;
 
@@ -86,9 +101,9 @@ function AppelAPI(long, lat) {
     } else {
       imgIcone.src = `ressources/nuit/${resultatsAPI.current.weather[0].icon}.svg`
     }
-    console.log(imgIcone);
+    // console.log(imgIcone);
 
-    chargementContainer.classList.add('disparition');
+    // chargementContainer.classList.add('disparition');
 
   })
 }
