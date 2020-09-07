@@ -13,6 +13,8 @@ const tempPourH = document.querySelectorAll('.heure-prevision-valeur');
 const joursDiv = document.querySelectorAll('.jour-prevision-nom');
 const tempsJourDiv = document.querySelectorAll('.jour-prevision-temp');
 const imgIcone = document.querySelectorAll('.logo-meteo');
+const chargementContainer = document.querySelector('.overlay-icone-chargement'); 
+
 
 if(navigator.geolocation) {
   navigator.geolocation.getCurrentPosition(position => {
@@ -20,6 +22,7 @@ if(navigator.geolocation) {
     let long = position.coords.longitude;
     let lat = position.coords.latitude;
     AppelAPI(long, lat);
+
   }, () => {
     alert(`Vous avez refusé la géolocatisation, l'application ne peut pas fonctionner, veuillez l'activer !`)
   })
@@ -41,11 +44,13 @@ function AppelAPI(long, lat) {
     temperature.innerText = `${Math.trunc(resultatsAPI.current.temp)}º`;
     localisation.innerText = resultatsAPI.timezone;
 
+
     // les heures par tranches de 3, avec leur temperature
 
     let heureActuelle = new Date().getHours()+3;
 
     for(let i = 0; i < heure.length; i++) {
+
       let heureIncr = heureActuelle + i * 3;
 
       if(heureIncr > 24) {
@@ -63,10 +68,12 @@ function AppelAPI(long, lat) {
       tempPourH[j].innerText = `${Math.trunc(resultatsAPI.hourly[j * 3 + 3].temp)}º`
     }
 
+    
     //afficher les jours sur la derniere ligne 
     for(let k = 0; k < tabJoursEnOrdre.length; k++) {
       joursDiv[k].innerText = tabJoursEnOrdre[k];
     }
+    
 
     //afficher la temperature de chaque jour
     for(let m = 0; m < 7; m++) {
@@ -79,6 +86,9 @@ function AppelAPI(long, lat) {
     } else {
       imgIcone.src = `ressources/nuit/${resultatsAPI.current.weather[0].icon}.svg`
     }
+    console.log(imgIcone);
+
+    chargementContainer.classList.add('disparition');
 
   })
 }
