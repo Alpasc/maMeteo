@@ -13,7 +13,7 @@ const tempPourH = document.querySelectorAll('.heure-prevision-valeur');
 const joursDiv = document.querySelectorAll('.jour-prevision-nom');
 const tempsJourDiv = document.querySelectorAll('.jour-prevision-temp');
 const imgIcone = document.querySelector('.logo-meteo');
-// const chargementContainer = document.querySelector('.overlay-icone-chargement');
+const chargementContainer = document.querySelector('.overlay-icone-chargement');
 const dateJour = document.querySelector('.date');
 const imgIconeHeure = document.querySelectorAll('.logo-future-meteo-h');
 const imgIconeJour = document.querySelectorAll('.logo-future-meteo-j')
@@ -42,7 +42,7 @@ let dateLocale = date.toLocaleString('fr-FR', {
 })
 dateLocale = dateLocale.charAt(0).toUpperCase() + dateLocale.slice(1,6) + ' ' + dateLocale.charAt(7).toUpperCase() + dateLocale.slice(8,17);
 dateJour.innerText = dateLocale;
-console.log(dateLocale);
+// console.log(dateLocale);
 
 // dateJour.innerText = `${dateJour.getDate() + dateJour.getMonth() + dateJour.getFullYear()}`
 
@@ -60,7 +60,7 @@ function AppelAPI(long, lat) {
     resultatsAPI = data;
 
     temps.innerText = resultatsAPI.current.weather[0].description;
-    temperature.innerText = `${Math.trunc(resultatsAPI.current.temp)}º`;
+    temperature.innerText = `${Math.trunc(resultatsAPI.current.temp)}°`;
     localisation.innerText = resultatsAPI.timezone;
 
 
@@ -84,7 +84,7 @@ function AppelAPI(long, lat) {
 
     //temperature par tranche de 3 heures
     for(let j = 0; j < tempPourH.length; j++) {
-      tempPourH[j].innerText = `${Math.trunc(resultatsAPI.hourly[j * 3 + 3].temp)}º`
+      tempPourH[j].innerText = `${Math.trunc(resultatsAPI.hourly[j * 3 + 3].temp)}°`
     }
 
 
@@ -105,7 +105,7 @@ function AppelAPI(long, lat) {
 
     //afficher la temperature de chaque jour
     for(let m = 0; m < 7; m++) {
-      tempsJourDiv[m].innerText = `${Math.trunc(resultatsAPI.daily[m + 1].temp.day)}º`
+      tempsJourDiv[m].innerText = `${Math.trunc(resultatsAPI.daily[m + 1].temp.day)}°`
     }
 
     //Affichage du logo meteo adapté par tranche de 3h
@@ -125,7 +125,7 @@ function AppelAPI(long, lat) {
     }
     // console.log(imgIcone);
 
-    // chargementContainer.classList.add('disparition');
+    chargementContainer.classList.add('disparition');
 
   })
 }
