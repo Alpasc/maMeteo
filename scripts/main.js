@@ -12,7 +12,7 @@ const heure = document.querySelectorAll('.heure-nom-prevision');
 const tempPourH = document.querySelectorAll('.heure-prevision-valeur');
 const joursDiv = document.querySelectorAll('.jour-prevision-nom');
 const tempsJourDiv = document.querySelectorAll('.jour-prevision-temp');
-const imgIcone = document.querySelectorAll('.logo-meteo');
+const imgIcone = document.querySelector('.logo-meteo');
 const chargementContainer = document.querySelector('.overlay-icone-chargement'); 
 
 
