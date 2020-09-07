@@ -14,7 +14,9 @@ const joursDiv = document.querySelectorAll('.jour-prevision-nom');
 const tempsJourDiv = document.querySelectorAll('.jour-prevision-temp');
 const imgIcone = document.querySelector('.logo-meteo');
 // const chargementContainer = document.querySelector('.overlay-icone-chargement');
-const dateJour = document.querySelector('.date'); 
+const dateJour = document.querySelector('.date');
+const imgIconeHeure = document.querySelectorAll('.logo-future-meteo-h');
+const imgIconeJour = document.querySelectorAll('.logo-future-meteo-j')
 
 
 if(navigator.geolocation) {
@@ -28,6 +30,8 @@ if(navigator.geolocation) {
     alert(`Vous avez refusé la géolocatisation, l'application ne peut pas fonctionner, veuillez l'activer !`)
   })
 }
+
+//Afichage et mise en forme de la date du jour
 
 let date = new Date();
 let dateLocale = date.toLocaleString('fr-FR', {
@@ -83,16 +87,34 @@ function AppelAPI(long, lat) {
       tempPourH[j].innerText = `${Math.trunc(resultatsAPI.hourly[j * 3 + 3].temp)}º`
     }
 
+
+    //Affichage du logo meteo adapté par tranche de 3h
+    for(let j2 = 0; j2 < imgIconeHeure.length; j2++) {
+      if(heureActuelle >= 6 && heureActuelle <= 21) {
+        imgIconeHeure[j2].src = `ressources/jour/${resultatsAPI.current.weather[0].icon}.svg`
+      } else {
+        imgIconeHeure[j2].src = `ressources/nuit/${resultatsAPI.current.weather[0].icon}.svg`
+      }
+    }
     
+
     //afficher les jours sur la derniere ligne 
     for(let k = 0; k < tabJoursEnOrdre.length; k++) {
       joursDiv[k].innerText = tabJoursEnOrdre[k];
     }
-    
 
     //afficher la temperature de chaque jour
     for(let m = 0; m < 7; m++) {
       tempsJourDiv[m].innerText = `${Math.trunc(resultatsAPI.daily[m + 1].temp.day)}º`
+    }
+
+    //Affichage du logo meteo adapté par tranche de 3h
+    for(let m2 = 0; m2 < imgIconeJour.length; m2++) {
+      if(heureActuelle >= 6 && heureActuelle <= 21) {
+        imgIconeJour[m2].src = `ressources/jour/${resultatsAPI.current.weather[0].icon}.svg`
+      } else {
+        imgIconeJour[m2].src = `ressources/nuit/${resultatsAPI.current.weather[0].icon}.svg`
+      }
     }
 
     //icone dynamique
