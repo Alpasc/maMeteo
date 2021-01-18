@@ -19,19 +19,25 @@ const imgIconeHeure = document.querySelectorAll('.logo-future-meteo-h');
 const imgIconeJour = document.querySelectorAll('.logo-future-meteo-j')
 
 
-if(navigator.geolocation) {
-  navigator.geolocation.getCurrentPosition(position => {
-    // console.log(position);
-    let long = position.coords.longitude;
-    let lat = position.coords.latitude;
-    AppelAPI(long, lat);
+// if(navigator.geolocation) {
+//   navigator.geolocation.getCurrentPosition(position => {
+//     // console.log(position);
+//     let long = position.coords.longitude;
+//     let lat = position.coords.latitude;
+//     AppelAPI(long, lat);
 
-  }, () => {
-    alert(`Vous avez refusé la géolocatisation, l'application ne peut pas fonctionner, veuillez l'activer !`)
-  })
-}
+//   }, () => {
+//     alert(`Vous avez refusé la géolocatisation, l'application ne peut pas fonctionner, veuillez l'activer !`)
+//   })
+// }
 
-//Afichage et mise en forme de la date du jour
+// special Toulouse
+
+  let long = 1.44367;
+  let lat = 43.604259;
+  AppelAPI(long, lat);
+
+//Affichage et mise en forme de la date du jour
 
 let date = new Date();
 
@@ -63,7 +69,8 @@ function AppelAPI(long, lat) {
 
     temps.innerText = resultatsAPI.current.weather[0].description;
     temperature.innerText = `${Math.trunc(resultatsAPI.current.temp)}°`;
-    localisation.innerText = resultatsAPI.timezone;
+    // localisation.innerText = resultatsAPI.timezone;
+    localisation.innerText = "Toulouse";
 
 
     // les heures par tranches de 3, avec leur temperature
