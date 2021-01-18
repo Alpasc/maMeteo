@@ -2,7 +2,7 @@ import tabJoursEnOrdre from './Utilitaire/gestionTemps.js';
 
 // console.log('DEPUIS MAIN JS ' + tabJoursEnOrdre);
 
-const CLEFAPI = '9538bdeb0237d0fac380697b08039cc4';
+const CLEFAPI = '7cd81442bf22367738fba35844d219c1';
 let resultatsAPI;
 
 const temps = document.querySelector('.temps');
@@ -34,15 +34,17 @@ if(navigator.geolocation) {
 //Afichage et mise en forme de la date du jour
 
 let date = new Date();
+
+// console.log(date);
 let dateLocale = date.toLocaleString('fr-FR', {
   weekday: 'short',
   year: 'numeric',
   month: 'short',
   day: 'numeric'
 })
-dateLocale = dateLocale.charAt(0).toUpperCase() + dateLocale.slice(1,6) + ' ' + dateLocale.charAt(7).toUpperCase() + dateLocale.slice(8,17);
-dateJour.innerText = dateLocale;
 // console.log(dateLocale);
+dateJour.innerText = dateLocale;
+
 
 // dateJour.innerText = `${dateJour.getDate() + dateJour.getMonth() + dateJour.getFullYear()}`
 
