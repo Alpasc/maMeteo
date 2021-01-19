@@ -4,22 +4,43 @@
   padding: 0;
 }
 
+@media screen and (min-width: 650px) {
+  .container {
+    width: 600px;
+    height: 400px;
+    grid-template: 70px 170px 80px 80px / repeat(8, 75px);
+    margin: 100px auto 0;
+  }
+
+  h1{
+  }
+}
+
+@media screen and (min-width: 930px) {
+  .container {
+    width: 800px;
+    height: 600px;
+    grid-template: 100px 250px 125px 125px / repeat(8, 100px);
+    margin: 100px auto 0;
+  }
+}
+
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Merriweather';
+  /* font-family: Arial, Helvetica, sans-serif; */
   color: #f1f1f1;
   background: linear-gradient(45deg, rgb(50,50,50), rgb(22,28,29));
   height: 100vh;
 }
 
 .container {
-  width: 800px;
-  height: 600px;
-  background: linear-gradient(45deg, #1068b6, #ec60a6);
+ 
+  background: linear-gradient(45deg, #1be7ff, #235789, #ff3cc7, #ff5714);
   display: grid;
-  grid-template: 100px 250px 125px 125px / repeat(8, 100px);
-  margin: 100px auto 0;
+  
   position: relative;
-  border: 1px solid #f1f1f1;
+  border: 2px solid #f1f1f1;
+  border-radius: 15px;
 }
 
 .titre-date {
@@ -28,7 +49,7 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  border-bottom: 1px solid #f1f1f1;
+  border-bottom: 2px solid #f1f1f1;
 }
 
 h1 {
@@ -81,16 +102,22 @@ h1 {
   display: flex;
   align-items: center;
   flex-direction: column;
-  border-top: 1px solid #f1f1f1;
+  border-top: 2px solid #f1f1f1;
+  border-radius: 10px;
   font-size: 21px;
 }
 
 .bloc-h:not(:last-child), .bloc-j:not(:last-child) {
-  border-right: 1px solid #f1f1f1;
+  border-right: 2px solid #f1f1f1;
 }
 
 .bloc-h p,  .bloc-j p {
   margin: 5px;
+}
+
+.logo-future-meteo-h,
+.logo-future-meteo-j{
+  margin-top: -10px;
 }
 
 /* Animation chargement */
