@@ -4,27 +4,6 @@
   padding: 0;
 }
 
-@media screen and (min-width: 650px) {
-  .container {
-    width: 600px;
-    height: 400px;
-    grid-template: 70px 170px 80px 80px / repeat(8, 75px);
-    margin: 100px auto 0;
-  }
-
-  h1{
-  }
-}
-
-@media screen and (min-width: 930px) {
-  .container {
-    width: 800px;
-    height: 600px;
-    grid-template: 100px 250px 125px 125px / repeat(8, 100px);
-    margin: 100px auto 0;
-  }
-}
-
 body {
   font-family: 'Merriweather';
   /* font-family: Arial, Helvetica, sans-serif; */
@@ -141,4 +120,42 @@ h1 {
 
 .disparition {
   opacity: 0;
+}
+
+
+@media screen and (max-width: 929px) {
+  .container {
+    width: 600px;
+    height: 400px;
+    grid-template: 70px 170px 80px 80px / repeat(8, 75px);
+    margin: 100px auto 0;
+  }
+
+  h1{
+    font-size: 25px;
+    font-weight: 400;
+  }
+
+  .bloc-info .temps,
+  .bloc-info .localisation {
+    font-size: 30px;
+    font-weight: 700
+  }
+
+  .bloc-info .temperature{
+    font-size: 40px;
+  }
+
+  .bloc-h, .bloc-j {
+    font-size: 15px;
+  }
+}
+
+@media screen and (min-width: 930px) {
+  .container {
+    width: 800px;
+    height: 600px;
+    grid-template: 100px 250px 125px 125px / repeat(8, 100px);
+    margin: 100px auto 0;
+  }
 }
